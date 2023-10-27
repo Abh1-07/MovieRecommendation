@@ -168,3 +168,7 @@ cython_debug/
 /Datasets/
 /main data.csv
 /notebooks/
+/Artifacts/similarity.pkl
+/Artifacts/movies.pkl
+/Artifacts/movie_dict.pkl
+/Artifacts/
