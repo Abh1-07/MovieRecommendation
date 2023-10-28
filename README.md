@@ -8,7 +8,7 @@ This application that provides comprehensive details about your favorite movies,
 All of this information is fetched from "The Movie Database" (TMDB) using their API.
 
 ## Get your API key
-- Create an account at TMDB.
+- Create an account at [TMDB](https://www.themoviedb.org).
 - In your account settings, click on the API link in the left sidebar and complete the API key request form. 
 - If asked for a website URL, you can simply provide "NA." Your API key will be available in the API section once your request is approved.
 
