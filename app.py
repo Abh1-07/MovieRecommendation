@@ -1,10 +1,10 @@
-import pickle
+
 import pandas as pd
-import numpy as np
 import streamlit as st
-import requests
-from src.exception import CustomException
-import sys
+
+# from src.exception import CustomException
+# import sys
+from src.pipeline.predict_pipeline import RecommendPipeline
 # from tmdbv3api import TMDb
 # tmdb = TMDb()
 api_key = 'bd9a5e8dd6e5ee4eab2ad20d409c4a62'
@@ -14,11 +14,9 @@ st.title('Movie Recommendation System')
 movie_df = pd.read_csv('main data.csv')
 
 movies_list = movie_df['movie_title'].values
-file_path = 'Artifacts/similarity.pkl'
-similarity = pickle.load(open(file_path, 'rb'))
 
 
-def fetch_poster(movie_id):
+'''def fetch_poster(movie_id):
     try:
         req = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}")
         data_json = req.json()
@@ -44,14 +42,15 @@ def recommendation(movie):
         movie_posters.append(fetch_poster(movie_id))
         recommended_movies.append(movie_df['movie_title'].iloc[i[0]])
     return recommended_movies, movie_posters
-
+'''
 
 selected_movie = st.selectbox(
     'Choose a Movie Name', movies_list)
 
 # st.button("Reset", type="primary")
 if st.button('Recommend Movies'):
-    names, posters = recommendation(selected_movie)
+    recom = RecommendPipeline()
+    names, posters = recom.recommendation(movie=selected_movie,api_key=api_key)
     col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
