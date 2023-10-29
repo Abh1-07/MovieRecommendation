@@ -16,41 +16,13 @@ movie_df = pd.read_csv('main data.csv')
 movies_list = movie_df['movie_title'].values
 
 
-'''def fetch_poster(movie_id):
-    try:
-        req = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}")
-        data_json = req.json()
-        if data_json['poster_path']:
-            path = data_json.get("poster_path")
-            poster = f"https://image.tmdb.org/t/p/original/{path}"
-            return poster
-        else:
-            return np.Nan
-    except Exception as e:
-        raise CustomException(e, sys)
-
-
-def recommendation(movie):
-    recommended_movies = []
-    movie = movie.lower()
-    movie_index = movie_df[movie_df['movie_title'] == movie].index[0]
-    distance = similarity[movie_index]
-    movie_list = sorted(list(enumerate(distance)), reverse=True, key=lambda x: x[1])[1:6]
-    movie_posters = []
-    for i in movie_list:
-        movie_id = movie_df['id'].iloc[i[0]]
-        movie_posters.append(fetch_poster(movie_id))
-        recommended_movies.append(movie_df['movie_title'].iloc[i[0]])
-    return recommended_movies, movie_posters
-'''
-
 selected_movie = st.selectbox(
     'Choose a Movie Name', movies_list)
 
 # st.button("Reset", type="primary")
 if st.button('Recommend Movies'):
     recom = RecommendPipeline()
-    names, posters = recom.recommendation(movie=selected_movie,api_key=api_key)
+    names, posters = recom.recommendation(movie=selected_movie, api_key=api_key)
     col1, col2, col3, col4, col5 = st.columns(5)
 
     with col1:
